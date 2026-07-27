@@ -1,0 +1,17 @@
+{
+  "name": "esp32-screen-led-server",
+  "version": "1.0.0",
+  "description": "Localhost Web Server for ESP32 Screen Click LED Control",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "esp32",
+    "led",
+    "localhost",
+    "server"
+  ],
+  "author": "",
+  "license": "ISC"
+}
