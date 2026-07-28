@@ -1,33 +1,26 @@
-# ESP32 Button
+# ESP32 Button Counter
 
-Simple PlatformIO project for an ESP32 DevKit and a pushbutton. Each press is
-reported in the serial monitor.
+A simple PlatformIO project for an ESP32 DevKit and a pushbutton, reporting button clicks over Serial at 115200 baud.
 
-## Hardware
+---
 
-- ESP32 DevKit board
-- Pushbutton
-- USB data cable
+## 🔌 Hardware Connections
 
-Connect one side of the pushbutton to GPIO 18 and the other side to GND. The
-program uses the ESP32's internal pull-up resistor, so no external resistor is
-needed.
+- **ESP32 DevKit board**
+- **Pushbutton:** Connect one pin to **GPIO 18** and the other pin to **GND** (uses internal pull-up resistor).
 
-Open the serial monitor at 115200 baud. Each time the button is pressed, the
-program prints `Button clicked`.
+---
 
-## Build and upload
+## ⚡ Build & Run
 
-1. Install VS Code and the PlatformIO extension.
-2. Open this folder as a PlatformIO project.
-3. Connect the ESP32 by USB.
-4. Run **Build**, then **Upload**.
-5. Open the serial monitor at **115200 baud**.
-
-Command-line equivalent:
-
-```text
-pio run
+```bash
 pio run --target upload
 pio device monitor
 ```
+
+---
+
+## ⚠️ Problems Faced & Solutions
+
+- **Problem:** No pin labels on the top of the ESP32 chip, making it hard to connect GPIO 18 and GND accurately on the breadboard.
+  - **Solution:** Referred to the pinout documentation diagram and counted pin positions.

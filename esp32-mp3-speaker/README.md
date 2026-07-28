@@ -1,12 +1,12 @@
-# ESP32 MP3 Web Controller & Speaker Driver (http://esp32.local)
+# ESP32 MP3 Web Controller & Speaker Driver
 
-This project runs directly inside **`esp32-mp3-speaker`** (using the same architecture as `esp32-screen-led-control`). It serves an interactive web dashboard at **`http://esp32.local`** where clicking the interactive speaker icon or buttons starts, stops, and controls volume for MP3 audio played through your **NodeMCU-32** and **S8050 NPN transistor**!
+An interactive web controller running on an ESP32 (**`http://esp32.local`**) to control MP3 audio playback through a transistor-driven speaker.
 
 ---
 
-## 📐 Breadboard Wiring Diagram (S8050 Transistor + Speaker)
+## 📐 Hardware Wiring
 
-```
+```text
                  [ NodeMCU-32 ESP32 ]
                    5V/VIN     P25(DAC1)     GND
                      │            │          │
@@ -27,39 +27,34 @@ This project runs directly inside **`esp32-mp3-speaker`** (using the same archit
                                   └──────────┴───► GND
 ```
 
----
-
-## 📌 Pin Connections
-
-1. **S8050 Emitter (Leg 1)** ➔ Connect to **ESP32 `GND`**
-2. **S8050 Base (Leg 2)** ➔ Connect through a **1kΩ Resistor** to **ESP32 `P25`**
-3. **S8050 Collector (Leg 3)** ➔ Connect to **Speaker Black Wire (-)**
-4. **Speaker Red Wire (+)** ➔ Connect to **ESP32 `5V / VIN`**
+### 📌 Pin Connections
+1. **S8050 Emitter (Pin 1)** ➔ ESP32 `GND`
+2. **S8050 Base (Pin 2)** ➔ **1kΩ Resistor** ➔ ESP32 `P25` (DAC1)
+3. **S8050 Collector (Pin 3)** ➔ Speaker **Black (-)**
+4. **Speaker Red (+)** ➔ ESP32 `5V / VIN`
 
 ---
 
 ## ⚡ Quick Setup & Upload
 
-### 1. Configure Wi-Fi Credentials
-Open `.env` in this directory and set your network credentials:
-```env
-WIFI_SSID="YOUR_WIFI_NAME"
-WIFI_PASSWORD="YOUR_WIFI_PASSWORD"
-```
-
-### 2. Upload Code to ESP32
-Run the standard PlatformIO upload command:
-```bash
-pio run --target upload
-```
+1. Set your Wi-Fi details in `.env`:
+   ```env
+   WIFI_SSID="YOUR_WIFI_NAME"
+   WIFI_PASSWORD="YOUR_WIFI_PASSWORD"
+   ```
+2. Upload to ESP32:
+   ```bash
+   pio run --target upload
+   ```
+3. Visit **`http://esp32.local`** in your browser *(or fallback AP `ESP32-Audio-Network` / `192.168.4.1`)*.
 
 ---
 
-## 🌐 Opening the Website (`http://esp32.local`)
+## ⚠️ Problems Faced & Solutions
 
-1. Make sure your phone or computer is on the **same Wi-Fi network**.
-2. Open your browser and go to:  
-   👉 **`http://esp32.local`**
-3. You can now click the **Speaker Icon** or **Start MP3** / **Stop MP3** / **Volume Slider** to control sound playback live!
-
-*(Note: If Wi-Fi fails to connect, the ESP32 automatically creates a fallback Wi-Fi hotspot named `ESP32-Audio-Network` with password `password123`. After joining it, use `http://esp32.local` or, if your device does not support mDNS, `http://192.168.4.1`.)*
+- **Problem:** No pin labels printed on top of the ESP32 board, making it hard to identify GPIO pins on the breadboard.
+  - **Solution:** Referenced the NodeMCU-32 pinout diagram online and counted physical pin counts from the top edge.
+- **Problem:** Audio was extremely quiet when plugging the speaker directly into the ESP32, and wasn't aware an amplifier/transistor circuit was necessary.
+  - **Solution:** Wired an S8050 NPN transistor circuit with a 1kΩ base resistor to amplify current to the speaker, greatly boosting volume.
+- **Problem:** Audio static / pop noise when ESP32 powers on.
+  - **Solution:** Initialized audio objects only on playback request so GPIO 25 stays quiet during Wi-Fi startup.
