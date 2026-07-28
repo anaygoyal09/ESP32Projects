@@ -1,0 +1,13 @@
+# PlatformIO build outputs
+.pio/
+.pioenvs/
+.piolibdeps/
+
+# Environment credentials
+.env
+
+# Editor & OS files
+.vscode/
+.idea/
+.DS_Store
+*.pyc

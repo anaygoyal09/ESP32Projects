@@ -1,3 +1,0 @@
-.pio/build/esp32dev/FrameworkArduino/cbuf.cpp.o: \
- /Users/anaygoyal/.platformio/packages/framework-arduinoespressif32/cores/esp32/cbuf.cpp \
- /Users/anaygoyal/.platformio/packages/framework-arduinoespressif32/cores/esp32/cbuf.h
