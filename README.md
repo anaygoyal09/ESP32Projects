@@ -62,6 +62,15 @@ An interactive web dashboard with hardware driver routines to operate DC motors 
   - **Solution:** Used ESP32 hardware LEDC PWM timer at 50Hz with 16-bit pulse resolution for stable pulse width timing.
 
 ---
+### 5. ESP32 Addressable LED Strip (`esp32-addressable-led-strip`)
+A PlatformIO starter project for a 5V, 3-wire addressable LED strip such as WS2812B or SK6812.
+
+* **Key Components:** ESP32 DevKit, 5V regulated power supply, addressable LED strip, 220–470Ω data resistor, and 500–1000µF supply capacitor.
+* **Features:** Low-brightness first-pixel test that cycles red, green, blue, and off.
+* **Important:** Confirm the strip is 5V and connect the ESP32 data line to the strip's `DIN`/`DI` end.
+
+---
+
 ## ⚡ Quick Start (PlatformIO)
 
 1. Clone or open any project directory in VS Code with PlatformIO installed.
