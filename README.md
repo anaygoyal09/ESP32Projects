@@ -48,6 +48,20 @@ A straightforward hardware project demonstrating physical button inputs and even
 
 ---
 
+### 4. ESP32 Motor Control Hub (`esp32-motor-control`)
+An interactive web dashboard with hardware driver routines to operate DC motors (via L298N/L293D H-Bridge driver) and Servo motors with real-time speed, direction, and angle controls.
+
+* **URL:** `http://esp32motor.local`
+* **Key Components:** ESP32 DevKit, L298N / L293D Motor Driver, DC Motor, SG90 Servo Motor.
+* **Features:** H-bridge direction control (Forward/Reverse/Stop), PWM speed slider (0-100%), Servo angle slider (0-180°), REST API endpoints (`/api/motor`, `/api/servo`, `/api/status`), SoftAP fallback.
+
+#### ⚠️ Problems Faced & Solutions
+- **Problem:** ESP32 resets unexpectedly when the motor starts running due to voltage drops.
+  - **Solution:** Powered the motor driver with an external battery/power supply, keeping power supplies separate while sharing a common ground connection.
+- **Problem:** Servo jitter during Wi-Fi activity.
+  - **Solution:** Used ESP32 hardware LEDC PWM timer at 50Hz with 16-bit pulse resolution for stable pulse width timing.
+
+---
 ## ⚡ Quick Start (PlatformIO)
 
 1. Clone or open any project directory in VS Code with PlatformIO installed.
