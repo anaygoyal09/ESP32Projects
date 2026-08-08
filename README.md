@@ -1,6 +1,6 @@
 # ESP32 Mini Projects 🚀
 
-A collection of hands-on ESP32 micro-controller mini-projects built with **PlatformIO**, featuring web dashboards, hardware drivers, and sensor/button controls.
+A collection of hands-on ESP32 microcontroller mini-projects built with **PlatformIO**, featuring web dashboards, hardware drivers, motor control hubs, addressable LED controllers, and sensor/button inputs.
 
 ---
 
@@ -62,12 +62,19 @@ An interactive web dashboard with hardware driver routines to operate DC motors 
   - **Solution:** Used ESP32 hardware LEDC PWM timer at 50Hz with 16-bit pulse resolution for stable pulse width timing.
 
 ---
-### 5. ESP32 Addressable LED Strip (`esp32-addressable-led-strip`)
-A PlatformIO starter project for a 5V, 3-wire addressable LED strip such as WS2812B or SK6812.
 
-* **Key Components:** ESP32 DevKit, 5V regulated power supply, addressable LED strip, 220–470Ω data resistor, and 500–1000µF supply capacitor.
-* **Features:** Low-brightness first-pixel test that cycles red, green, blue, and off.
-* **Important:** Confirm the strip is 5V and connect the ESP32 data line to the strip's `DIN`/`DI` end.
+### 5. ESP32 Addressable LED Strip (`esp32-addressable-led-strip`)
+An interactive web controller and hardware driver for 5V 3-wire addressable LED strips (WS2812B / SK6812) supporting live RGB color customization, multiple lighting animation effects, and dynamic LED count control.
+
+* **URL:** `http://esp32.local` (or `http://192.168.4.1` via SoftAP)
+* **Key Components:** ESP32 DevKit, WS2812B/SK6812 5V LED Strip, 220–470Ω Data Resistor, 500–1000µF Supply Capacitor, 5V Regulated Power Supply.
+* **Features:** Live color picker & 8 color presets, active LED count slider (1–300 LEDs live), PWM brightness scaling, multiple lighting effects (Solid, Rainbow Wave, Breathing Pulse, Color Wipe, Color Chase, Twinkle/Fire), REST API endpoints (`/api/control`, `/api/status`), SoftAP fallback (`ESP32-LED-Strip`).
+
+#### ⚠️ Problems Faced & Solutions
+- **Problem:** Single LED lighting default during initial setup.
+  - **Solution:** Integrated a live slider in the web interface (1 to 300 LEDs) with quick preset buttons so the active length can be adjusted on the fly without re-flashing.
+- **Problem:** Flashing timed out during PlatformIO upload stub initialization.
+  - **Solution:** Configured `no_stub_upload.py` to upload directly through the ESP32 ROM bootloader at 115200 baud for stable flashing.
 
 ---
 
@@ -87,3 +94,4 @@ A PlatformIO starter project for a 5V, 3-wire addressable LED strip such as WS28
    ```bash
    pio device monitor
    ```
+
